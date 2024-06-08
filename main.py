@@ -202,19 +202,17 @@ def plot_clusters(df):
 
 def main():
     df = pd.read_csv("tweets.csv")
-    # print(df.shape)
+    print(df.shape)
 
     df = preprocess_data(df)
-    # print(df.head())
-    # print(df.shape)
+    print(df.head())
+    print(df.shape)
 
     df = tokenize(df)
 
-    # print(df["tweet_words"].head())
+    print(df["tweet_words"].head())
     df = stop_words(df)
-    # print(df["tweet_words"].head())
-
-    # print(df["tweet_words"].explode().value_counts().head(10))  # Częstotliwość słów
+    print(df["tweet_words"].head())
 
     df = lemmatize(df)
     df["equals"] = df["tweet_words"] == df["tweet_words_lem"]
@@ -223,7 +221,7 @@ def main():
     freq_plot(df)
     words_cloud(df)
 
-    # pd.set_option("display.max_columns", None)
+    # pd.set_option("display.max_columns", None) # wyświetlenie wszystkich kolumn
     # print(df)
 
     # Analiza sentymentu
@@ -243,7 +241,6 @@ def main():
 
     # Analiza emocji
     df_emotions = emotion_analysis(df)
-    print(df_emotions)
     emotions_over_time = (
         df_emotions.groupby("created_at")[["happy", "angry", "surprise", "sad", "fear"]]
         .mean()
